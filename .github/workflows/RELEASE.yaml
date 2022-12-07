@@ -53,7 +53,7 @@ jobs:
           tags: camunda/connectors:${{ github.event.inputs.version }}
 
       - name: Build and Push Docker Image with tag latest
-        if: ${{ github.event.inputs.push-latest }}
+        if: github.event.inputs.push-latest == 'true'
         uses: docker/build-push-action@v3
         with:
           context: .
