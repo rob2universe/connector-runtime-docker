@@ -24,7 +24,7 @@ Example adding a Connector JAR by using volumes
 docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.3.0
 ```
 
-## Secrets
+# Secrets
 
 To inject secrets into the Connector Runtime, they have to be available in the environment of the Docker container.
 
@@ -45,6 +45,6 @@ current shell environment when `docker run` is executed. The `--env-file`
 option allows using a single file with the format `NAME=VALUE` per line
 to inject multiple secrets at once.
 
-## Connectors Bundle
+# Connectors Bundle
 
 The [Connectors Bundle project](https://github.com/camunda/connectors-bundle) contains all available out-of-the-box Connectors provided by Camunda 8.
