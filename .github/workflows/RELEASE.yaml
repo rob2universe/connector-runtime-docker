@@ -45,20 +45,35 @@ jobs:
           username: ${{ steps.secrets.outputs.DOCKERHUB_USER }}
           password: ${{ steps.secrets.outputs.DOCKERHUB_PASSWORD }}
 
-      - name: Build and Push Docker Image tag ${{ github.event.inputs.version }}
+      - name: Build and Push Docker Image tag ${{ github.event.inputs.version }} - Runtime
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: runtime
           push: true
           tags: camunda/connectors:${{ github.event.inputs.version }}
 
-      - name: Build and Push Docker Image with tag latest
+      - name: Build and Push Docker Image with tag latest - Runtime
         if: github.event.inputs.push-latest == 'true'
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: runtime
           push: true
           tags: camunda/connectors:latest
+
+      - name: Build and Push Docker Image tag ${{ github.event.inputs.version }} - Bundle
+        uses: docker/build-push-action@v3
+        with:
+          context: bundle
+          push: true
+          tags: camunda/connectors-bundle-bash:${{ github.event.inputs.version }}
+
+      - name: Build and Push Docker Image with tag latest - Bundle
+        if: github.event.inputs.push-latest == 'true'
+        uses: docker/build-push-action@v3
+        with:
+          context: bundle
+          push: true
+          tags: camunda/connectors-bundle-bash:latest
 
       - name: Tag version
         run: |

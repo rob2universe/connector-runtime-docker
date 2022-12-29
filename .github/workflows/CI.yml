@@ -10,6 +10,13 @@ jobs:
 
     - name: Lint Connector Runtime Dockerfile
       uses: hadolint/hadolint-action@v3.0.0
+      with:
+        dockerfile: runtime/Dockerfile
+
+    - name: Lint Connectors Bundle Dockerfile
+      uses: hadolint/hadolint-action@v3.0.0
+      with:
+        dockerfile: bundle/Dockerfile
 
     - name: Import Secrets
       id: secrets
@@ -35,9 +42,16 @@ jobs:
         username: ${{ steps.secrets.outputs.DOCKERHUB_USER }}
         password: ${{ steps.secrets.outputs.DOCKERHUB_PASSWORD }}
 
-    - name: Build and Push Runtime Docker Image tag SNAPSHOT
+    - name: Build and Push Runtime Docker Image tag SNAPSHOT - Runtime
       uses: docker/build-push-action@v3
       with:
-        context: .
+        context: runtime
         push: ${{ github.ref == 'refs/heads/main' }}
         tags: camunda/connectors:SNAPSHOT
+
+    - name: Build and Push Runtime Docker Image tag SNAPSHOT - Bundle
+      uses: docker/build-push-action@v3
+      with:
+        context: bundle
+        push: ${{ github.ref == 'refs/heads/main' }}
+        tags: camunda/connectors-bundle-bash:SNAPSHOT
