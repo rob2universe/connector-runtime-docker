@@ -1,50 +1,8 @@
 # Camunda 8 Connector Runtime
 
-This project provides a base Docker image including the [Spring Zeebe Connector runtime](https://github.com/camunda-community-hub/spring-zeebe/tree/master/connector-runtime). 
-The image starts the Connector Runtime with all `jar` files provided in the `/opt/app` directory as classpath.
+This repository provides 2 Docker images:
 
-To use the image, add at least one Connector to the classpath. We recommend providing JARs with all dependencies bundled.
+- [Camunda 8 Connector Runtime](runtime)
+- [Bundle example](bundle) - Connector Runtime + All Camunda 8 out-of-the-box Connectors
 
-> :warning: As all Connectors share a single classpath, it can happen that
-> different versions of the same dependency are available which can lead to
-> conflicts. To prevent this, common dependencies like `jackson` can be shaded and
-> relocated inside the connector jar.
-
-Example adding a Connector JAR by extending the image
-
-```dockerfile
-FROM camunda/connectors:0.3.0
-
-ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.11.0/connector-http-json-0.11.0-with-dependencies.jar /opt/app/
-```
-
-Example adding a Connector JAR by using volumes
-
-```bash
-docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.3.0
-```
-
-# Secrets
-
-To inject secrets into the Connector Runtime, they have to be available in the environment of the Docker container.
-
-For example, you can inject secrets when running a container:
-
-```bash
-docker run --rm --name=connectors -d \
-           -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
-           -e MY_SECRET=secret \              # Set a secret with value
-           -e SECRET_FROM_SHELL \             # Set a secret from the environment
-           --env-file secrets.txt \           # Set secrets from a file
-           camunda/connectors:0.2.2
-```
-
-The secret `MY_SECRET` value is specified directly in the `docker run` call,
-whereas the `SECRET_FROM_SHELL` is injected based on the value in the
-current shell environment when `docker run` is executed. The `--env-file`
-option allows using a single file with the format `NAME=VALUE` per line
-to inject multiple secrets at once.
-
-# Connectors Bundle
-
-The [Connectors Bundle project](https://github.com/camunda/connectors-bundle) contains all available out-of-the-box Connectors provided by Camunda 8.
+Please refer to the README files in the corresponding directories for documentation.
