@@ -9,12 +9,12 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Lint Connector Runtime Dockerfile
-      uses: hadolint/hadolint-action@v3.0.0
+      uses: hadolint/hadolint-action@v3.1.0
       with:
         dockerfile: runtime/Dockerfile
 
     - name: Lint Connectors Bundle Dockerfile
-      uses: hadolint/hadolint-action@v3.0.0
+      uses: hadolint/hadolint-action@v3.1.0
       with:
         dockerfile: bundle/Dockerfile
 
