@@ -16,15 +16,20 @@ To use the image, add at least one Connector to the classpath. We recommend prov
 Example adding a Connector JAR by extending the image
 
 ```dockerfile
-FROM camunda/connectors:0.4.2
+FROM camunda/connectors:0.5.0
 
-ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.11.0/connector-http-json-0.11.0-with-dependencies.jar /opt/app/
+ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-http-json/0.15.0/connector-http-json-0.15.0-with-dependencies.jar /opt/app/
 ```
 
 Example adding a Connector JAR by using volumes
 
 ```bash
-docker run --rm --name=connectors -d -v $PWD/connector.jar:/opt/app/ camunda/connectors:0.4.2
+docker run --rm --name=connectors -d \
+            -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a connector jar to the classpath
+            --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
+            -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
+            -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
+            camunda/connectors:0.5.0
 ```
 
 # Secrets
@@ -35,11 +40,14 @@ For example, you can inject secrets when running a container:
 
 ```bash
 docker run --rm --name=connectors -d \
-           -v $PWD/connector.jar:/opt/app/ \  # Add a connector jar to the classpath
-           -e MY_SECRET=secret \              # Set a secret with value
-           -e SECRET_FROM_SHELL \             # Set a secret from the environment
-           --env-file secrets.txt \           # Set secrets from a file
-           camunda/connectors:0.4.2
+           -v $PWD/connector.jar:/opt/app/connector.jar \                      # Add a connector jar to the classpath
+           --network=your-zeebe-network \                                      # Optional: attach to network if Zeebe is isolated with Docker network
+           -e ZEEBE_CLIENT_BROKER_GATEWAY-ADDRESS=ip.address.of.zeebe:26500 \  # Specify Zeebe address
+           -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                           # Optional: provide security configs to connect to Zeebe
+           -e MY_SECRET=secret \                                               # Set a secret with value
+           -e SECRET_FROM_SHELL \                                              # Set a secret from the environment
+           --env-file secrets.txt \                                            # Set secrets from a file
+           camunda/connectors:0.5.0
 ```
 
 The secret `MY_SECRET` value is specified directly in the `docker run` call,
