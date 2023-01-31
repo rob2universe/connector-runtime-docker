@@ -46,7 +46,7 @@ jobs:
           password: ${{ steps.secrets.outputs.DOCKERHUB_PASSWORD }}
 
       - name: Build and Push Docker Image tag ${{ github.event.inputs.version }} - Runtime
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: runtime
           push: true
@@ -54,14 +54,14 @@ jobs:
 
       - name: Build and Push Docker Image with tag latest - Runtime
         if: github.event.inputs.push-latest == 'true'
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: runtime
           push: true
           tags: camunda/connectors:latest
 
       - name: Build and Push Docker Image tag ${{ github.event.inputs.version }} - Bundle
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: bundle
           push: true
@@ -69,7 +69,7 @@ jobs:
 
       - name: Build and Push Docker Image with tag latest - Bundle
         if: github.event.inputs.push-latest == 'true'
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: bundle
           push: true
