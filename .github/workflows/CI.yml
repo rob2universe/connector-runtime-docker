@@ -32,6 +32,11 @@ jobs:
           secret/data/products/connectors/ci/common DOCKERHUB_USER;
           secret/data/products/connectors/ci/common DOCKERHUB_PASSWORD;
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+      with:
+        platforms: 'arm64,arm'
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
@@ -48,6 +53,7 @@ jobs:
         context: runtime
         push: ${{ github.ref == 'refs/heads/main' }}
         tags: camunda/connectors:SNAPSHOT
+        platforms: linux/amd64,linux/arm64
 
     - name: Build and Push Runtime Docker Image tag SNAPSHOT - Bundle
       uses: docker/build-push-action@v4
@@ -55,3 +61,4 @@ jobs:
         context: bundle
         push: ${{ github.ref == 'refs/heads/main' }}
         tags: camunda/connectors-bundle-bash:SNAPSHOT
+        platforms: linux/amd64,linux/arm64
