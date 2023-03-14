@@ -1,7 +1,7 @@
 FROM eclipse-temurin:17.0.6_10-jre
 
 # Configure the connector runtime version
-ARG SPRING_ZEEBE_VERSION=8.1.17
+ARG SPRING_ZEEBE_VERSION=8.2.0-alpha1
 
 RUN mkdir /opt/app
 
