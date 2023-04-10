@@ -81,5 +81,5 @@ docker run --rm --name=connectors -d \
            -e ZEEBE_CLIENT_SECURITY_PLAINTEXT=true \                                     # Optional: provide security configs to connect to Zeebe
            -e JAVAX_NET_SSL_TRUSTSTORE=/opt/security/truststore/your_truststore_file \   # Change your trust store file name
            -e JAVAX_NET_SSL_TRUSTSTOREPASSWORD=your_truststore_password \                # Provide your trust store password
-           camunda/connectors:0.7.0
+           camunda/connectors:0.8.0
 ```
