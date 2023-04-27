@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17.0.6_10-jre
+FROM eclipse-temurin:17.0.7_7-jre
 
 # Configure the connector runtime version
 ARG SPRING_ZEEBE_VERSION=8.2.0
