@@ -1,9 +1,9 @@
 # Configure the connector runtime version
-ARG RUNTIME_VERSION=0.10.0
+ARG RUNTIME_VERSION=0.9.0
 FROM camunda/connectors:${RUNTIME_VERSION}
 
 # Configure versions of included connectors
-ARG CAMUNDA_CONNECTORS_VERSION='0.20.0'
+ARG CAMUNDA_CONNECTORS_VERSION='0.19.2'
 
 # Download connectors from maven central
 ADD https://repo1.maven.org/maven2/io/camunda/connector/connector-aws-lambda/${CAMUNDA_CONNECTORS_VERSION}/connector-aws-lambda-${CAMUNDA_CONNECTORS_VERSION}-with-dependencies.jar /opt/app/
