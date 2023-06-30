@@ -1,3 +1,5 @@
+⛔ **NOTE: This repository is archived.** Connector runtime Dockerfiles have been moved to the [connectors-bundle](https://github.com/camunda/connectors-bundle/tree/538-add-runtime-dockerfiles/connector-runtime/connector-runtime-application) repository.
+
 # Camunda 8 Connector Runtime
 
 This repository provides 2 Docker images:
