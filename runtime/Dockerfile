@@ -1,11 +1,11 @@
-FROM eclipse-temurin:17.0.7_7-jre
+FROM eclipse-temurin:17.0.8.1_1-jre
 
 # Configure the connector runtime version
 ARG SPRING_ZEEBE_VERSION=8.3.0
 
 RUN mkdir /opt/app
 
-COPY start.sh /start.sh
+COPY start.sh /start.sh 
 RUN chmod +x start.sh
 
 # Download Connector Runtime Application from Maven Central
