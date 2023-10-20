@@ -1,4 +1,4 @@
-⛔ **NOTE: This repository is archived.** Connector runtime Dockerfiles have been moved to the [connectors-bundle](https://github.com/camunda/connectors-bundle/tree/538-add-runtime-dockerfiles/connector-runtime/connector-runtime-application) repository.
+⛔ **NOTE: This repository is archived.** Connector runtime Dockerfiles have been moved to the [connectors-runtime](https://github.com/camunda/connectors/tree/main/connector-runtime/connector-runtime-application) repository.
 
 # Camunda 8 Connector Runtime
 
